@@ -49,9 +49,16 @@ The first series of modules focus on getting learners engaged with the content a
 
 This workstation is currently being managed as a Amazon Machine Instance (AMI). This AMI is managed by Chef through the Training AWS Account.
 
-* Windows 2012R2
+The workstation and the nodes are Windows 2012R2 instances with the following credentials:
+
+```
+user:     Administrator
+password: Cod3Can!
+```
 
 The AMI was generated with the following actions:
+
+> NOTE: The creation of the image is a manual process of executing a number of steps and then saving that current working instance as an image.
 
 * Installed the basic components through the Nordstrom's ChefDK bootstrap script
 
@@ -60,9 +67,32 @@ The AMI was generated with the following actions:
 ```
 
 * Enabled powershell script execution
-
 * Changed the password to "Cod3Can!"
-
 * Installed the Atom FoodCritic Linter
 * Installed the Atom Rubocop Linter
 * Write a `kitchen-template.yml` to the "\\Users\\Administrator"
+* Install the kitchen-ec2 gem `chef gem install kitchen-ec2`
+* Enable remote administration via WINRM
+
+```
+# WinRM
+write-output "Setting up WinRM"
+write-host "(host) setting up WinRM"
+
+cmd.exe /c winrm quickconfig -q
+cmd.exe /c winrm quickconfig '-transport:http'
+cmd.exe /c winrm set "winrm/config" '@{MaxTimeoutms="1800000"}'
+cmd.exe /c winrm set "winrm/config/winrs" '@{MaxMemoryPerShellMB="1024"}'
+cmd.exe /c winrm set "winrm/config/service" '@{AllowUnencrypted="true"}'
+cmd.exe /c winrm set "winrm/config/client" '@{AllowUnencrypted="true"}'
+cmd.exe /c winrm set "winrm/config/service/auth" '@{Basic="true"}'
+cmd.exe /c winrm set "winrm/config/client/auth" '@{Basic="true"}'
+cmd.exe /c winrm set "winrm/config/service/auth" '@{CredSSP="true"}'
+cmd.exe /c winrm set "winrm/config/listener?Address=*+Transport=HTTP" '@{Port="5985"}'
+cmd.exe /c netsh advfirewall firewall set rule group="remote administration" new enable=yes
+cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985"
+cmd.exe /c net stop winrm
+cmd.exe /c sc config winrm start= auto
+cmd.exe /c net start winrm
+cmd.exe /c wmic useraccount where "name='chef'" set PasswordExpires=FALSE
+```
