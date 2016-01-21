@@ -70,6 +70,7 @@ The AMI was generated with the following actions:
 * Changed the password to "Cod3Can!"
 * Installed the Atom FoodCritic Linter
 * Installed the Atom Rubocop Linter
+* Added an ec2 json hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
 * Write a `kitchen-template.yml` to the "\\Users\\Administrator" that contains the following [content](https://github.com/chef-training/chef-essentials-windows/blob/master/kitchen-template.yml).
 * Install the kitchen-ec2 gem `chef gem install kitchen-ec2`
 * Enable remote administration via WINRM
