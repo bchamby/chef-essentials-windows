@@ -60,19 +60,33 @@ The AMI was generated with the following actions:
 
 > NOTE: The creation of the image is a manual process of executing a number of steps and then saving that current working instance as an image.
 
+* [Change](https://support.managed.com/kb/a472/how-to-change-the-administrator-password-in-windows-server-2003-2008-r2-or-2012.aspx) the Administrator's password to "Cod3Can!"
+
+* Enable PowerShell Script Execution
+
+```
+Set-ExecutionPolicy RemoteSigned
+```
+
 * Installed the basic components through the Nordstrom's ChefDK bootstrap script
 
 ```
 (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
 ```
 
-* Enabled powershell script execution
-* Changed the password to "Cod3Can!"
 * Installed the Atom FoodCritic Linter
 * Installed the Atom Rubocop Linter
+
 * Added an ec2 json hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
+
 * Write a `kitchen-template.yml` to the "\\Users\\Administrator" that contains the following [content](https://github.com/chef-training/chef-essentials-windows/blob/master/kitchen-template.yml).
-* Install the kitchen-ec2 gem `chef gem install kitchen-ec2`
+
+* Install the kitchen-ec2 gem
+
+```
+chef gem install kitchen-ec2
+```
+
 * Enable remote administration via WINRM
 
 ```
@@ -95,5 +109,4 @@ cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985"
 cmd.exe /c net stop winrm
 cmd.exe /c sc config winrm start= auto
 cmd.exe /c net start winrm
-cmd.exe /c wmic useraccount where "name='chef'" set PasswordExpires=FALSE
 ```
