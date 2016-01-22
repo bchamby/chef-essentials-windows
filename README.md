@@ -1,29 +1,14 @@
 # Chef Essentials
 
-This is a repo for developing Chef Essentials.
+This is a repository for developing Chef Essentials for Windows.
 
-The latest published version of these training materials are located as follows:
+## Abstract
 
-Chef-Essentials-Instructor-Kit, which contains
-
-•	All 15 PPT slide decks, which you should teach from.
-
-•	Instructor Guide for you to learn from, practice with, and perhaps use as reference while teaching. (The instructor guide contains speaker notes, instructor notes, and Appendix Z. Appendix Z contains lab setup info.)
-
-•	Participant Guide, which is the same as the Instructor Guide sans instructor notes and Appendix Z.
-
-•	README.
-
-https://opscode.box.com/s/bx51ra6nk8r25f1c869xc5xkxckcxpte
-
-Here is the link to only the Chef-Essentials-Participant-Guide. This is the link that will be in the student's confirmation email so some students may already have it prior to class starting.
-
-https://opscode.box.com/s/75s0s971d7z5hdmtb6ua0os2vekf7zz6
-
+Chef Essentials is a comprehensive instructor-led course covering the basic architecture of Chef, the use of Chef Development Kit (ChefDK), and associated tools. Development, engineering, and operations staff will learn to use Chef to automate the configuration, deployment, and management of server infrastructure. Participants will also learn how to test their configurations. Each of the core units in this course has hands-on exercises to reinforce the material. At the end of the course, students will have a code repository that can be used and modified to solve real business problems.
 
 ## Modules
 
-1. Intro
+1. Introduction
 2. Resources
 3. Cookbooks
 4. chef-client
@@ -39,9 +24,41 @@ https://opscode.box.com/s/75s0s971d7z5hdmtb6ua0os2vekf7zz6
 14.	Environments
 15.	Further Resources
 
-## Publishing
+## Published Content
 
 Video on how to export the content to a Participant guide: https://drive.google.com/file/d/0B4WmSTt8VtdKZDY5RnhIWVVYZkk/view?usp=sharing
+
+The latest published version of these training materials are located as follows:
+
+### Participant Guide**
+
+The participant guide is a PDF that contains the notes export from the content slides.
+
+The content can be found here: NOT YET RELEASED
+
+### Instructor Kit
+
+* All 15 PPT slide decks for each module.
+
+* Instructor Guide for you to learn from, practice with, and perhaps use as reference while teaching. The instructor guide contains the notes export from the content slides with additional instructor notes and lab setup instructions.
+
+* Participant Guide
+
+This content can be found here: NOT YET RELEASED
+
+### Screencast Videos
+
+This content can be found here: NOT YET RELEASED
+
+## Known Issues
+
+* MODULE 05 - There seems to issues with the Windows instances instantiated from AMI not being able to reach the metadata server. Test Kitchen will not work because the instance is not able to retrieve the IAM role credentials to instantiate test instances.
+
+* MODULES 10-14 - There seems to issues with the Windows instances instantiated from AMI not being able to reach the metadata server. The cloud metadata is not able to be loaded into the node object. This make it so the node will return an empty set of data when using `node['cloud']` (modules 10-14). This will also make it impossible to use `knife winrm` because it is using the internal IP Address.
+
+> On an Amazon EC2 instance you can verify if the metadata is available by executing the following command: `curl http://169.254.169.254/latest/meta-data/`
+
+* MODULES 09-12 - Currently with Chef 12.5.1 there is an issue where the initial bootstrapping will hang. The Ruby process will appear unresponsive. The only workaround at the moment is to login to the instance, open Task Manager, kill the Ruby process, and then re-bootstrap the instance again.
 
 ## Workstation Setup
 
