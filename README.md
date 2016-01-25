@@ -6,6 +6,23 @@ This is a repository for developing Chef Essentials for Windows.
 
 Chef Essentials is a comprehensive instructor-led course covering the basic architecture of Chef, the use of Chef Development Kit (ChefDK), and associated tools. Development, engineering, and operations staff will learn to use Chef to automate the configuration, deployment, and management of server infrastructure. Participants will also learn how to test their configurations. Each of the core units in this course has hands-on exercises to reinforce the material. At the end of the course, students will have a code repository that can be used and modified to solve real business problems.
 
+## Learner Requirements
+
+Attendees need a network-enabled laptop with a Remote Desktop Client that supports RDP.
+
+* Windows 7 with [Remote Desktop Connection](http://www.wikihow.com/Use-Remote-Desktop-in-Windows-7)
+
+* Mac OS X 10.11 (El Capitan) with [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12)
+
+* Ubuntu 12.04 with [Remmina Remote Desktop Client](http://www.remmina.org/wp/)
+
+
+It’s best that learners have some familiarity and comfort with the following:
+
+* Writing code (of just about any flavor) in a text editor
+* Working on the command line
+* Basic system administration – installing packages, configuring those packages, starting services
+
 ## Modules
 
 1. Introduction
