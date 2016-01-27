@@ -14,7 +14,7 @@ Attendees need a network-enabled laptop with a Remote Desktop Client that suppor
 
 * Mac OS X 10.11 (El Capitan) with [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12)
 
-* Ubuntu 12.04 with [Remmina Remote Desktop Client](http://www.remmina.org/wp/)
+* Ubuntu 14.04 with [Remmina Remote Desktop Client](http://www.remmina.org/wp/)
 
 
 It’s best that learners have some familiarity and comfort with the following:
@@ -23,7 +23,7 @@ It’s best that learners have some familiarity and comfort with the following:
 * Working on the command line
 * Basic system administration – installing packages, configuring those packages, starting services
 
-## Modules
+## Agenda
 
 1. Introduction
 2. Resources
