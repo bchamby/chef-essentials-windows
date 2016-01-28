@@ -31,9 +31,9 @@ It’s best that learners have some familiarity and comfort with the following:
 4. chef-client
 5. Testing Cookbooks6
 6. Details About the System
-7.	Desired State and Data
-8.	Workstation Installation
-9.	The Chef Server
+7. Desired State and Data
+8. Workstation Installation
+9. The Chef Server
 10.	Community Cookbooks
 11.	Managing Multiple Nodes
 12.	Roles
@@ -47,7 +47,7 @@ Video on how to export the content to a Participant guide: https://drive.google.
 
 The latest published version of these training materials are located as follows:
 
-### Participant Guide**
+### Participant Guide
 
 The participant guide is a PDF that contains the notes export from the content slides.
 
@@ -81,7 +81,18 @@ This content can be found here: NOT YET RELEASED
 
 The first series of modules focus on getting learners engaged with the content as quickly as possible. A workstation is provided to the learners.
 
+### Amazon Machine Instance
+
 This workstation is currently being managed as a Amazon Machine Instance (AMI). This AMI is managed by Chef through the Training AWS Account.
+
+*
+https://github.com/chef-training/chefdk-image/blob/master/cookbooks/workstations/recipes/essentials.rb
+ (
+ami-cd95b3a7)
+
+> This AMI was generated manually. Though in the future the goal would to also creat this instance with a [Packer](https://github.com/chef-training/chefdk-fundamentals-image) script similar to the other training instances.  It is based on a Marketplace AMI so it cannot be made public. If you would like access to this AMI to deliver training please contact [training@chef.io](mailto:training@chef.io) the request that includes your Amazon Account Id.
+
+### Creating the Workstation
 
 The workstation and the nodes are Windows 2012R2 instances with the following credentials:
 
