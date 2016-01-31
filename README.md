@@ -75,26 +75,26 @@ This content can be found here: NOT YET RELEASED
 
 > On an Amazon EC2 instance you can verify if the metadata is available by executing the following command: `curl http://169.254.169.254/latest/meta-data/`
 
-* MODULES 09-12 - Currently with Chef 12.5.1 there is an issue where the initial bootstrapping will hang. The Ruby process will appear unresponsive. The only workaround at the moment is to login to the instance, open Task Manager, kill the Ruby process, and then re-bootstrap the instance again.
+* MODULES 09-12 - Currently with Chef 12.5.1 there is an issue where the initial bootstrapping will hang if you use the workstation instance as a node instance. The workaround is to use the node image instead of the workstation image. In the event that you did use the workstation instance as a node the Ruby process will appear unresponsive. The only workaround at the moment is to login to the instance, open Task Manager, kill the Ruby process, and then re-bootstrap the instance again.
 
-## Workstation Setup
+## Workstation and Node Setup
 
-The first series of modules focus on getting learners engaged with the content as quickly as possible. A workstation is provided to the learners.
+The first series of modules focus on getting learners engaged with the content as quickly as possible. A workstation is provided to the learners. In the second set of modules the learners are required to bootstrap a windows node.
 
 ### Amazon Machine Instance
 
-This workstation is currently being managed as a Amazon Machine Instance (AMI). This AMI is managed by Chef through the Training AWS Account.
+This workstation and node are currently being managed as a Amazon Machine Instance (AMI). This AMI is managed by Chef through the Training AWS Account.
 
-*
-https://github.com/chef-training/chefdk-image/blob/master/cookbooks/workstations/recipes/essentials.rb
- (
+* Chef Essentials - Windows 2012 - 1.04 (
 ami-cd95b3a7)
 
-> This AMI was generated manually. Though in the future the goal would to also creat this instance with a [Packer](https://github.com/chef-training/chefdk-fundamentals-image) script similar to the other training instances.  It is based on a Marketplace AMI so it cannot be made public. If you would like access to this AMI to deliver training please contact [training@chef.io](mailto:training@chef.io) the request that includes your Amazon Account Id.
+* Essentials - Windows 2012 Node - 1.0.0 (ami-???????)
+
+> The workstation and node AMI was generated manually. Though in the future the goal would to also create this instance with a [Packer](https://github.com/chef-training/chefdk-fundamentals-image) script similar to the other training instances.  It is based on a Marketplace AMI so it cannot be made public. If you would like access to this AMI to deliver training please contact [training@chef.io](mailto:training@chef.io) the request that includes your Amazon Account Id.
 
 ### Creating the Workstation
 
-The workstation and the nodes are Windows 2012R2 instances with the following credentials:
+The workstation is a Windows 2012R2 instances with the following credentials:
 
 ```
 user:     Administrator
@@ -122,7 +122,7 @@ Set-ExecutionPolicy RemoteSigned
 * Installed the Atom FoodCritic Linter
 * Installed the Atom Rubocop Linter
 
-* Added an ec2 json hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
+* Added an ec2 JSON hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
 
 * Write a `kitchen-template.yml` to the "\\Users\\Administrator" that contains the following [content](https://github.com/chef-training/chef-essentials-windows/blob/master/kitchen-template.yml).
 
@@ -131,6 +131,53 @@ Set-ExecutionPolicy RemoteSigned
 ```
 chef gem install kitchen-ec2
 ```
+
+* Enable remote administration via WINRM
+
+```
+# WinRM
+write-output "Setting up WinRM"
+write-host "(host) setting up WinRM"
+
+cmd.exe /c winrm quickconfig -q
+cmd.exe /c winrm quickconfig '-transport:http'
+cmd.exe /c winrm set "winrm/config" '@{MaxTimeoutms="1800000"}'
+cmd.exe /c winrm set "winrm/config/winrs" '@{MaxMemoryPerShellMB="1024"}'
+cmd.exe /c winrm set "winrm/config/service" '@{AllowUnencrypted="true"}'
+cmd.exe /c winrm set "winrm/config/client" '@{AllowUnencrypted="true"}'
+cmd.exe /c winrm set "winrm/config/service/auth" '@{Basic="true"}'
+cmd.exe /c winrm set "winrm/config/client/auth" '@{Basic="true"}'
+cmd.exe /c winrm set "winrm/config/service/auth" '@{CredSSP="true"}'
+cmd.exe /c winrm set "winrm/config/listener?Address=*+Transport=HTTP" '@{Port="5985"}'
+cmd.exe /c netsh advfirewall firewall set rule group="remote administration" new enable=yes
+cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985"
+cmd.exe /c net stop winrm
+cmd.exe /c sc config winrm start= auto
+cmd.exe /c net start winrm
+```
+
+### Creating the Node
+
+The node is a Windows 2012R2 instances with the following credentials:
+
+```
+user:     Administrator
+password: Cod3Can!
+```
+
+The AMI was generated with the following actions:
+
+> NOTE: The creation of the image is a manual process of executing a number of steps and then saving that current working instance as an image.
+
+* [Change](https://support.managed.com/kb/a472/how-to-change-the-administrator-password-in-windows-server-2003-2008-r2-or-2012.aspx) the Administrator's password to "Cod3Can!"
+
+* Enable PowerShell Script Execution
+
+```
+Set-ExecutionPolicy RemoteSigned
+```
+
+* Added an ec2 JSON hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
 
 * Enable remote administration via WINRM
 
