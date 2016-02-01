@@ -85,16 +85,15 @@ The first series of modules focus on getting learners engaged with the content a
 
 This workstation and node are currently being managed as a Amazon Machine Instance (AMI). This AMI is managed by Chef through the Training AWS Account.
 
-* Chef Essentials - Windows 2012 - 1.04 (
-ami-cd95b3a7)
+* Chef Essentials - Windows 2012 - 1.04 (ami-cd95b3a7)
 
-* Essentials - Windows 2012 Node - 1.0.0 (ami-???????)
+* Essentials - Windows 2012 Node - 1.0.2 (ami-4a80ac20)
 
 > The workstation and node AMI was generated manually. Though in the future the goal would to also create this instance with a [Packer](https://github.com/chef-training/chefdk-fundamentals-image) script similar to the other training instances.  It is based on a Marketplace AMI so it cannot be made public. If you would like access to this AMI to deliver training please contact [training@chef.io](mailto:training@chef.io) the request that includes your Amazon Account Id.
 
 ### Creating the Workstation
 
-The workstation is a Windows 2012R2 instances with the following credentials:
+The workstation is a Windows 2012R2 (ami-9a0558f0) instances with the following credentials:
 
 ```
 user:     Administrator
@@ -158,7 +157,7 @@ cmd.exe /c net start winrm
 
 ### Creating the Node
 
-The node is a Windows 2012R2 instances with the following credentials:
+The node is a Windows 2012R2 (ami-9a0558f0) instances with the following credentials:
 
 ```
 user:     Administrator
