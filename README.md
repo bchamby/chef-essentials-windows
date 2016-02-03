@@ -43,8 +43,6 @@ It’s best that learners have some familiarity and comfort with the following:
 
 ## Published Content
 
-Video on how to export the content to a Participant guide: https://drive.google.com/file/d/0B4WmSTt8VtdKZDY5RnhIWVVYZkk/view?usp=sharing
-
 The latest published version of these training materials are located as follows:
 
 ### Participant Guide
@@ -66,6 +64,10 @@ This content can be found here: https://opscode.box.com/s/hxmj8l537rybmy6ctv0on4
 ### Screencast Videos
 
 This content can be found here: NOT YET CREATED
+
+### Publishing Process
+
+Video on how to export the content from slides to guides: https://drive.google.com/file/d/0B4WmSTt8VtdKZDY5RnhIWVVYZkk/view?usp=sharing
 
 ## Known Issues
 
