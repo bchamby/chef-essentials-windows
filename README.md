@@ -121,7 +121,7 @@ Set-ExecutionPolicy RemoteSigned
 ```
 
 * Installed the Atom FoodCritic Linter
-* Installed the Atom Rubocop Linter
+* Installed the Atom RuboCop Linter
 
 * Added an ec2 JSON hints file (content: `{}`) to `C:\chef\ohai\hints\ec2.json`
 
