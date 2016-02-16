@@ -29,7 +29,7 @@ It’s best that learners have some familiarity and comfort with the following:
 2. Resources
 3. Cookbooks
 4. chef-client
-5. Testing Cookbooks6
+5. Testing Cookbooks
 6. Details About the System
 7. Desired State and Data
 8. Workstation Installation
